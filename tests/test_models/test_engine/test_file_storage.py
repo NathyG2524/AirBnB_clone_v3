@@ -118,4 +118,4 @@ class TestFileStorage(unittest.TestCase):
         """ Test that gets an obj"""
        
     def test_count(self, cls):
-        """ Test that count the object created""
+        """ Test that count the object created """
