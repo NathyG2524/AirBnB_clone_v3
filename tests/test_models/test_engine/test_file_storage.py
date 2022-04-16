@@ -116,9 +116,6 @@ class TestFileStorage(unittest.TestCase):
 
     def test_get(self):
         """ Test that gets an obj"""
-        id_storage = storage.get('User', self.user.id)
-        get_id = self.user.id
-        self.assertEqual(id_storage, get_id)
-        
+       
     def test_count(self, cls):
         """ Test that count the object created""
