@@ -10,17 +10,19 @@ from models import storage
 from models.state import State
 
 
-@app_views.route("/state/")
+@app_views.route("/states/")
 def states_view():
     """return all states"""
-    list = [storage.all(State).to_dict()]
+    list = []
+    for value in storage.all(State).values():
+        list.append(value.to_dict())
     return jsonify(list)
     
 
 @app_views.route("/states/<state_id>",  methods=['GET'])
 def state_view(state_id):
     """return state objects"""  
-    x = storage.get(State.id)
+    x = storage.get(State, state_id)
     if x == None:
         abort(400)
     obj = x.to_dict()
