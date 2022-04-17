@@ -6,6 +6,12 @@ create a route
 from api.v1.views import app_views
 from flask import jsonify
 from models import storage
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 @app_views.route('/status')
@@ -17,12 +23,9 @@ def index_status():
 @app_views.route('/stats')
 def count_obj():
     """count objects"""
-    diction_list = {
-        "amenities": storage.count(Amenities),
-        "cities": storage.count(Cities),
-        "places": storage.count(Place),
-        "reviews": storage.count(Reviews),
-        "states": storage.count(States),
-        "users": storage.count(Users)
-    }
-    return jsonify(diction_list)
+    return jsonify(amenities=storage.count(Amenity),
+                   cities=storage.count(City),
+                   places=storage.count(Place),
+                   reviews=storage.count(Review),
+                   states=storage.count(State),
+                   users=storage.count(User))
