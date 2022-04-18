@@ -32,3 +32,39 @@ def city_id_route(city_id):
         abort(404)
     obj = x.to_dic()
     return obj
+
+@app_views.route('/api/v1/cities/<city_id>', methods=['DELETE'])
+def delete_city(city_id):
+    """Deletes a City object"""
+    x = storage.get(City, city_id)
+    if x is None:
+        abort(404)
+    x.delete()
+    storage.save()
+    return jsonify({}), 200
+
+@app_views.route('/api/v1/states/<state_id>/cities', methods=['POST'])
+def post_city():
+    """Creates a city"""
+    if not request.get_json():
+        return ("Not a JSON", 400)
+    if 'name' is not request.get_json():
+         return ("Missing name", 400)
+    new_data = request.get_json()
+    new_city = City(**new_data)
+    new_city.save()
+    return jsonify(new_city.to_dict()), 201
+
+@app_views.route('/api/v1/cities/<city_id>', methods=['PUT'])
+def put_city(city_id):
+    """updates a city"""
+    x = storage.get(City, city_id)
+    if x is None:
+        abort(404)
+    if not request.get_json():
+        return ("Not a JSON", 404)
+    new_data = request.get_json()
+    for key, value in new_data.items():
+        setattr(x, key, value)
+    x.save()
+    return jsonify(x.to_dict()), 200
