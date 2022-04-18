@@ -10,7 +10,7 @@ from models import storage
 from models.state import State
 
 
-@app_views.route("/states/")
+@app_views.route("/states", strict_slashes=False)
 def states_view():
     """return all states"""
     list = []
@@ -44,9 +44,9 @@ def delete_views(state_id):
 def state_post():
     """create a new state"""
     if not request.get_json():
-        return make_response("Not a JSON", 400)
+        return ("Not a JSON", 400)
     if 'name' not in request.get_json():
-        return make_response("Missing name", 400)
+        return ("Missing name", 400)
     new_data = request.get_json()
     new_state = State(**new_data)
     new_state.save()
