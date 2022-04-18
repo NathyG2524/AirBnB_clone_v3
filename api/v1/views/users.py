@@ -67,5 +67,5 @@ def user_state_put(user_id):
     for key, value in new_data.items():
         setattr(x, key, value)
         x.save()
-    obj = x.to_dict()
-    return jsonify(obj), 200
+        obj = x.to_dict()
+        return jsonify(obj), 200
