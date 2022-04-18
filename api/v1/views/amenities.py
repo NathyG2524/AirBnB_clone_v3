@@ -11,7 +11,7 @@ from models.amenity import Amenity
 
 
 @app_views.route("/amenities", strict_slashes=False)
-def states_view():
+def amenity_view():
     """return all amenities"""
     list = []
     for value in storage.all(Amenity).values():
@@ -20,7 +20,7 @@ def states_view():
 
 
 @app_views.route("/amenities/<amenity_id>",  methods=['GET'])
-def state_view(amenity_id):
+def amenity_view_id(amenity_id):
     """return amenity objects"""
     x = storage.get(Amenity, amenity_id)
     if x is None:
@@ -30,7 +30,7 @@ def state_view(amenity_id):
 
 
 @app_views.route("/amenities/<amenity_id>", methods=['GET', 'DELETE'])
-def delete_views(amenity_id):
+def delete_amenity_views(amenity_id):
     """Delete amenity object with the given amenity_id"""
     x = storage.get(Amenity, amenity_id)
     if not x:
@@ -41,7 +41,7 @@ def delete_views(amenity_id):
 
 
 @app_views.route("/amenities/", methods=['POST'])
-def state_post():
+def amenity_post():
     """create a new amenity"""
     if not request.get_json():
         return ("Not a JSON", 400)
@@ -54,7 +54,7 @@ def state_post():
 
 
 @app_views.route("/amenities/<amenity_id>", methods=['PUT'])
-def state_put(amenity_id):
+def amenity_put(amenity_id):
     """update a amenity with a amenity_id"""
     x = storage.get(Amenity, amenity_id)
     if x is None:
