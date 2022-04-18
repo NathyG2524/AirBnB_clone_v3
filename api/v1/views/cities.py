@@ -1,4 +1,4 @@
-#!usr/bin/python3
+#!/usr/bin/python3
 """
 create a new view for city objects
 that handles all default RESTFul API
